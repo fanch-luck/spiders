@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from wbimgs.items import WbimgsItem
+from wbimgs.wbimgs.items import WbimgsItem
 import re
 
 
