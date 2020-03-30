@@ -108,7 +108,7 @@ if __name__ == '__main__':
                     'hanguo': 5,
                     'riben': 6,
                     'xiezhen': 7}
-    root = 'F:\资源_' + re.sub('\D', '', nowtimestr())  # 获取网页资源保存路径, 后缀为当前时间数值
+    root = 'D:\yhxz521_' + re.sub('\D', '', nowtimestr())  # 获取网页资源保存路径, 后缀为当前时间数值
     os.mkdir(root)
     url_fenlei = None
     path_fenlei = None
