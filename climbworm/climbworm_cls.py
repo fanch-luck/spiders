@@ -71,6 +71,7 @@ class YhxzCollector(object):
         return title_urls
 
     def get_img_urls(self, title_url):
+        pass
 
 
 
