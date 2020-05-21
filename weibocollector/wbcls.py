@@ -40,9 +40,9 @@ class WbCollector(object):
         chrome_options.add_argument('--no-sandbox')
         self.driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=self.webdriverpath)
 
-    def load_wb_page(self, wburl: str) -> str:
+    def load_dynamic_page(self, wburl: str) -> str:
         """
-        使用selenium完整加载wb页面
+        使用selenium完整加载动态页面
         :param wburl:
         :return: html页面文件（字符串）
         """
@@ -147,7 +147,7 @@ def single_download(wburl, downloadpath) -> None:
     if not os.path.exists(downloadpath):
         os.makedirs(downloadpath)
     wb = WbCollector(WEBDRIVERPATH)
-    html = wb.load_wb_page(wburl)
+    html = wb.load_dynamic_page(wburl)
     wb_img_data = wb.parse_wb_page(html)
     wb.download_imgs(wb_img_data, downloadpath)
 
