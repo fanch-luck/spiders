@@ -38,7 +38,7 @@ def parse_wb_page(htmlsource: str) -> list:
     return wbimg_data
 
 
-def parse_owhat_rank(htmlsource: str) -> None:
+def parse_owhat_rank(htmlsource: str) -> list:
     tree = etree.HTML(htmlsource)
     eachonexpath = '//div[@class="each_one"]'
     eachonenamepath = "div/h2/text()"
@@ -50,11 +50,7 @@ def parse_owhat_rank(htmlsource: str) -> None:
         record["name"] = eachone.xpath(eachonenamepath)[0]
         record["yuan"] = eachone.xpath(eachoneyuanpath)[0]
         rank.append(record)
-    with open("owhat_rank.csv", "w", encoding="utf-8") as f:
-        for i in range(len(rank)):
-            line = "{}, {}, {}".format(i + 1, rank[i]["name"], rank[i]["yuan"])
-            print(line)
-            f.write(line + "\n")
+    return rank
 
 
 if __name__ == "__main__":

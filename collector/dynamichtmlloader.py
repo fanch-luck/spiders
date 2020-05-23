@@ -42,9 +42,10 @@ class Loader(object):
                 #     current_scrollheight -= 1
                 try:
                     current_scrollheight = self.driver.execute_script("return document.body.scrollHeight")
-                    self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
                     print('now loading wb page...', current_scrollheight)
-                    time.sleep(2)
+                    for i in range(5):
+                        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+                        time.sleep(0.4)
                 except TimeoutException:
                     print('load wb page time out.')
                     self.driver.execute_script('window.stop()')
