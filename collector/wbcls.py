@@ -169,28 +169,52 @@ if __name__ == "__main__":
     wb_url = "https://m.weibo.cn/u/7165916155?uid=7165916155&luicode=10000011&lfid=1076037165916155"
     # single_download(wb_url, download_path)
 
-    YCYPICSTATIONS = [
-    {"name": "散仙丨杨超越个站",
-     "url": "https://m.weibo.cn/u/5324768697?uid=5324768697&luicode=10000011&lfid=1076035324768697"},
-    {"name": "whYUEspecial·杨超越",
-     "url": "https://m.weibo.cn/u/2676540645?uid=2676540645&luicode=10000011&lfid=1008082a98366b6a3546bd16e9da0571e34b84_-_soul"},
-    {"name": "ChampagneRose_杨超越个站",
-     "url": "https://m.weibo.cn/u/5951606667?uid=5951606667&luicode=10000011&lfid=1076035951606667"},
-    {"name": "杨超越的摸鱼基地",
-     "url": "https://m.weibo.cn/u/7165916155?uid=7165916155&luicode=10000011&lfid=1076037165916155"},
-    {"name": "SweetTown0731_杨超越",
-     "url": "https://m.weibo.cn/u/6573230444?uid=6573230444&luicode=10000011&lfid=1076036573230444"},
-    {"name": "l绝对甜度l-杨超越奶糖个站",
-     "url": "https://m.weibo.cn/u/6675007997?uid=6675007997"},
-    {"name": "Pirateship_杨超越",
-     "url": "https://m.weibo.cn/u/7261549951?uid=7261549951&luicode=10000011&lfid=1076037261549951"},
-    {"name": "杨超越FashionChannel",
-     "url": "https://m.weibo.cn/u/6457609902?uid=6457609902&luicode=10000011&lfid=1076036457609902"},
-    {"name": "初·拾吾丨杨超越个站",
-     "url": "https://m.weibo.cn/u/6874700984?uid=6874700984&luicode=10000011&lfid=1076036874700984"},
-    {"name": "FancyCarp-杨超越锦鲤站",
-     "url": "https://m.weibo.cn/u/6841492211?uid=6841492211&luicode=10000011&lfid=1076036841492211"},
-    {"name": "·731号星球·",
-     "url": "https://m.weibo.cn/u/6349247329?uid=6349247329&luicode=10000011&lfid=1076036349247329"}
-]
+    YCYPICSTATIONS_OTHORS = [
+        {"name": "杨超越的摸鱼基地",
+         "url": "https://m.weibo.cn/u/7165916155?uid=7165916155&luicode=10000011&lfid=1076037165916155"},
+        {"name": "杨超越FashionChannel",
+         "url": "https://m.weibo.cn/u/6457609902?uid=6457609902&luicode=10000011&lfid=1076036457609902"},
+        {"name": "FancyCarp-杨超越锦鲤站",
+         "url": "https://m.weibo.cn/u/6841492211?uid=6841492211&luicode=10000011&lfid=1076036841492211"},
+    ]
+    YCYPICSTATIONS_ACTING = [
+        {"name": "ChampagneRose_杨超越个站", "url": "https://m.weibo.cn/n/ChampagneRose_杨超越个站"},
+        {"name": "whYUEspecial·杨超越", "url": "https://m.weibo.cn/n/whYUEspecial·杨超越"},
+        {"name": "SweetTown0731_杨超越", "url": "https://m.weibo.cn/n/SweetTown0731_杨超越"},
+        {"name": "散仙丨杨超越个站", "url": "https://m.weibo.cn/n/散仙丨杨超越个站"},
+        {"name": "TsukinoUsagi_杨超越", "url": "https://m.weibo.cn/n/TsukinoUsagi_杨超越"},
+        {"name": "Summersugar·杨超越", "url": "https://m.weibo.cn/n/Summersugar·杨超越"},
+        {"name": "袋鼠妈妈的育儿指南", "url": "https://m.weibo.cn/n/袋鼠妈妈的育儿指南"},
+        {"name": "怦然心动丨0731杨超越", "url": "https://m.weibo.cn/n/怦然心动丨0731杨超越"},
+        {"name": "Blossom_0731", "url": "https://m.weibo.cn/n/Blossom_0731"},
+        {"name": "StarWish丨杨超越", "url": "https://m.weibo.cn/n/StarWish丨杨超越"},
+        {"name": "l绝对甜度l-杨超越奶糖个站", "url": "https://m.weibo.cn/n/l绝对甜度l-杨超越奶糖个站"},
+        {"name": "初·拾吾丨杨超越个站", "url": "https://m.weibo.cn/n/初·拾吾丨杨超越个站"},
+        {"name": "·731号星球·", "url": "https://m.weibo.cn/n/·731号星球·"},
+        {"name": "越式绿色染发室", "url": "https://m.weibo.cn/n/越式绿色染发室"},
+        {"name": "岁月无忧愁·杨超越", "url": "https://m.weibo.cn/n/岁月无忧愁·杨超越"},
+        {"name": "发财堂BLESSU", "url": "https://m.weibo.cn/n/发财堂BLESSU"},
+        {"name": "Fairyland0731", "url": "https://m.weibo.cn/n/Fairyland0731"},
+        {"name": "叶叔叔的喜茶丨杨超越个站", "url": "https://m.weibo.cn/n/叶叔叔的喜茶丨杨超越个站"},
+        {"name": "喜杨杨_杨超越个站", "url": "https://m.weibo.cn/n/喜杨杨_杨超越个站"},
+        {"name": "Pirateship_杨超越", "url": "https://m.weibo.cn/n/Pirateship_杨超越"},
+        {"name": "PeachGrove丨杨超越个站", "url": "https://m.weibo.cn/n/PeachGrove丨杨超越个站"},
+        {"name": "假日狙击609_杨超越", "url": "https://m.weibo.cn/n/假日狙击609_杨超越"}
+    ]
+    YCYPICSTATIONS_NOT_ACTING = [
+        {"name": "Exceeding0731", "url": "https://m.weibo.cn/n/Exceeding0731"},
+        {"name": "空想地图环游记丨杨超越", "url": "https://m.weibo.cn/n/空想地图环游记丨杨超越"},
+        {"name": "Midsummer0731", "url": "https://m.weibo.cn/n/Midsummer0731"},
+        {"name": "S-Surpass_杨超越", "url": "https://m.weibo.cn/n/S-Surpass_杨超越"},
+        {"name": "CutieLand杨超越", "url": "https://m.weibo.cn/n/CutieLand杨超越"},
+        {"name": "Collector杨超越_收集者", "url": "https://m.weibo.cn/n/Collector杨超越_收集者"},
+        {"name": "寶石光Scintillation0731", "url": "https://m.weibo.cn/n/寶石光Scintillation0731"},
+        {"name": "Fairy0731_杨超越", "url": "https://m.weibo.cn/n/Fairy0731_杨超越"},
+        {"name": "Helianthus丨杨超越", "url": "https://m.weibo.cn/n/Helianthus丨杨超越"},
+        {"name": "KOI_杨超越个站", "url": "https://m.weibo.cn/n/KOI_杨超越个站"},
+        {"name": "731摄氏度·杨超越", "url": "https://m.weibo.cn/n/731摄氏度·杨超越"},
+        {"name": "JulyHymn_杨超越", "url": "https://m.weibo.cn/n/JulyHymn_杨超越"},
+        {"name": "ProtugalLaurel0731_杨超越", "url": "https://m.weibo.cn/n/ProtugalLaurel0731_杨超越"},
+        {"name": "HoneyPeach·杨超越", "url": "https://m.weibo.cn/n/HoneyPeach·杨超越"}
+    ]
     # multi_download(YCYPICSTATIONS)
