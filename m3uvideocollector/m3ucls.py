@@ -14,6 +14,7 @@ import re
 from requests_html import HTMLSession  # 用于下载文件
 from browsermobproxy import Server
 from make_time_formated import *
+import _thread as thread
 # browsermobproxy 是基于LittleProxy的的代理服务，启用时作为，作为Selenium浏览器的标准代理，抓取请求和返回内容
 # 需下载脚本文件配合用https://github.com/lightbody/browsermob-proxy/releases
 
@@ -100,12 +101,13 @@ class M3uCllector(object):
                         ts_urls.append(line)
                 if ts_urls:
                     if not ts_base_url:
-                        m = re.search("\S+.com", m3u8url)  # 截取.ts文件链接头base url https://605ziyuan.com
-                        ts_base_url = m.group()
+                        ts_base_url = "/".join(m3u8url.split("/")[:-1])  # 最大可能匹配存放m3u8和ts文件的路径
                 else:
                     print(".m3u8 file parsed, but fail to get url of ts files")
+        # print(ts_base_url)
+        # print(ts_urls)
         if ts_base_url and ts_urls:
-            ts_urls = [ts_base_url + url for url in ts_urls]  # 合并成完整ts URL
+            ts_urls = [ts_base_url + "/" + url for url in ts_urls]  # 合并成完整ts URL
         self.ts_base_url = ts_base_url
         self.ts_urls = ts_urls
         return ts_urls
@@ -138,15 +140,22 @@ class M3uCllector(object):
         else:
             ts_urls = tsurls
         if ts_urls:
-            for tsurl in ts_urls:
-                if tsurl:
-                    ts_name, ts_data = self.download_ts_data(tsurl)
-                    self.tsdata[ts_name] = ts_data
-                    time.sleep(0.1)
+            # for tsurl in ts_urls:
+            #     if tsurl:
+            #         ts_name, ts_data = self.download_ts_data(tsurl)
+            #         self.tsdata[ts_name] = ts_data
+            #         time.sleep(0.1)
+            for i in range(len(ts_urls)):
+                if ts_urls[i]:
+                    self.tsdata[i] = {"url": ts_urls[i]}
+            for k in self.tsdata.keys():
+                self.tsdata[k]["name"], self.tsdata[k]["data"] = \
+                    thread.start_new(self.download_ts_data, (self, self.tsdata[k]["url"]))
+                time.sleep(1)
             time.sleep(1)
             tsdatas = []
             for k in sorted(self.tsdata.keys()):
-                tsdatas.append(self.tsdata[k])
+                tsdatas.append(self.tsdata[k]["data"])
             data = b''.join(tsdatas)
             if not savepath:
                 sp = nowtimestr("%Y%m%d%H%M%S") + ".mp4"
@@ -166,10 +175,10 @@ class M3uCllector(object):
 if __name__ == "__main__":
     webdriver_path = r"C:\WEBDRIVERS\chromedriver.exe"
     browsermob_proxy_bat_path = r"E:\MyWorkPlace\spiders\browsermob-proxy\browsermob-proxy-2.1.4\bin\browsermob-proxy.bat"
-    video_play_url = "http://www.zd518.cn/vod-play-id-142752-src-1-num-1.html"
+    video_play_url = "https://www.555duo.net/a/play1/7633.html"
     collector = M3uCllector(webdriver_path, browsermob_proxy_bat_path)
-    # m3u8_urls = collector.get_m3u8_urls(video_play_url)
-    m3u8_urls = ["https://2.ddyunbo.com/20191219/2V4EJdvv/800kb/hls/index.m3u8"]
+    m3u8_urls = collector.get_m3u8_urls(video_play_url)
+    # m3u8_urls = ["https://2.ddyunbo.com/20191219/2V4EJdvv/800kb/hls/index.m3u8"]
     ts_urls = collector.get_ts_urls(m3u8_urls)
     output = r"E:\MyWorkPlace\spiders\m3uvideocollector\download"
     collector.download_ts_files(ts_urls, output)
