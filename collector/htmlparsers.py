@@ -50,8 +50,15 @@ def parse_owhat_rank(htmlsource: str) -> list:
         record["name"] = eachone.xpath(eachonenamepath)[0]
         record["yuan"] = eachone.xpath(eachoneyuanpath)[0]
         rank.append(record)
+    # save detail data to csv file
+    lines = ["{},{}\n".format(i["name"], i["yuan"]) for i in rank]
+    with open("csv.csv", "w", encoding="utf-8") as f:
+        f.writelines(lines)
     return rank
 
 
 if __name__ == "__main__":
-    pass
+    with open("html.html", "r", encoding="utf-8") as f:
+        htmlsource = f.read()
+    parse_owhat_rank(htmlsource)
+

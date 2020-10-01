@@ -8,12 +8,12 @@
 from dynamichtmlloader import Loader
 from htmlparsers import parse_owhat_rank
 from make_time_formated import nowtimestr
-import codecs
+import sys
 
 
 def bubsort(datadict: dict) -> list:
     """
-    以value为依据进行排序
+    order by value
     :param datadict: {k1:value1, k2:value2, ...}
     :return: sorted datalist 形如[{k1:value1}, {k2:value2}, ...]
     """
@@ -30,17 +30,21 @@ def bubsort(datadict: dict) -> list:
 
 
 def main():
-    loadder = Loader()
-    loadder.config_webdriver(r"C:\WEBDRIVERS\chromedriver.exe")
-    html = loadder.load_dynamic_html("https://m.owhat.cn/shop/toplist.html?id=100944")
+    loader = Loader()
+    if sys.platform == "win32":
+        loader.config_webdriver(r"C:\WEBDRIVERS\chromedriver.exe")
+    if sys.platform == "linux":
+        loader.config_webdriver(r"/usr/bin/chromeriver")
+    html = loader.load_dynamic_html("https://m.owhat.cn/shop/toplist.html?id=118424")
     rank = parse_owhat_rank(html)
+    now = nowtimestr('%Y%m%d%H%M%S')
 
     # 统计
     nnames = len(rank)
     totalyuan = 0
     top = []
     groups = dict()
-    with open("owhat_rank.csv", "w", encoding="utf-8") as f:
+    with open("owhat_rank_{}.csv".format(now), "w", encoding="utf-8") as f:  # original data
         for i in range(len(rank)):
             line = "{}, {}, {}".format(i + 1, rank[i]["name"], rank[i]["yuan"])
             # print(line)
@@ -64,10 +68,7 @@ def main():
     for i in range(len(sortedgroups)):
         if i in range(20):
             lines.append("\n{}, {}, {}".format(i+1, *list(sortedgroups[i].items())[0]))
-    filename="{}.csv".format(nowtimestr('%Y%m%d%H%M%S'))
-    with open(filename, "wb", encoding="utf-8") as f:
-        f.write(codecs.BOM_UTF8)
-    with open(filename, "w", encoding="utf-8") as f:
+    with open("owhat_data_{}.csv".format(now), "w", encoding="utf-8") as f:
         f.writelines(lines)
 
 

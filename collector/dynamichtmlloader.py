@@ -11,6 +11,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 import os
 import time
+import sys
 
 
 class Loader(object):
@@ -52,11 +53,15 @@ class Loader(object):
             time.sleep(1)
             html = self.driver.page_source
             self.driver.quit()
-            # self.base_url = html.base_url
-            # with open("html.html", "w", encoding="utf-8") as f:
-            #     f.write(html)
+            with open("html.html", "w", encoding="utf-8") as f:
+                f.write(html)
             return html
 
 
 if __name__ == "__main__":
-    pass
+    loader = Loader()
+    if sys.platform == "win32":
+        loader.config_webdriver(r"C:\WEBDRIVERS\chromedriver.exe")
+    if sys.platform == "linux":
+        loader.config_webdriver(r"/usr/bin/chromeriver")
+    loader.load_dynamic_html("https://m.owhat.cn/shop/toplist.html?id=118424")
